@@ -1,0 +1,81 @@
+@import compass/css3
+
+/*
+    Angular Shelf
+    https://github.com/airtonix/angular-shelf
+    Copyright 2013 Zenobius Jiricek
+    MIT License */
+
+
+
+.contains-shelf
+
+
+    .shelf-cover
+        +transform(translate3d(0,0,0))
+        +transition(margin-left 0.3s ease-in-out)
+
+
+    .shelf
+
+        +respondTo(smallScreen)
+            width: $shelfWidth
+
+        width: 88%
+        position: fixed
+        height: 100%
+        +transform(translate3d(0,0,0))
+        +transition(margin-left 0.3s ease-in-out)
+
+    &.flying-shelf
+        .shelf
+            z-index: 20
+            margin-left: 100%
+        .shelf-cover
+            z-index: 1
+            margin-left: 0%
+
+    &.attached-shelf
+        .shelf
+            z-index: 1
+            margin-left: 100%
+        .shelf-cover
+            z-index: 1
+            margin-left: 0%
+
+    &.revealed-shelf
+        .shelf
+
+            z-index: 1
+            +respondTo(smallScreen)
+                margin-left: 100%-$shelfWidth
+            margin-left: 12%
+
+        .shelf-cover
+            z-index: 20
+            margin-left: 0%
+
+
+    &.shelf-active
+
+        &.attached-shelf,
+        &.flying-shelf
+            .shelf
+                margin-left: 12%
+
+        &.revealed-shelf,
+        &.attached-shelf
+            .shelf-cover
+                margin-left: -88%
+
+        +respondTo(smallScreen)
+            &.attached-shelf,
+            &.flying-shelf
+                .shelf
+                    margin-left: 100%-$shelfWidth
+
+            &.revealed-shelf,
+            &.attached-shelf
+                .shelf-cover
+                    margin-left: 0%-$shelfWidth
+

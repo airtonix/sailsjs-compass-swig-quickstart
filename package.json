@@ -1,0 +1,34 @@
+{
+  "name": "sailsjs-compass-swig-quickstart",
+  "private": false,
+  "version": "0.0.1",
+  "description": "A starter project that gets you rolling with AngularJS, Compass, Swig and SailsJS",
+  "repository": "git:ssh://github.com/airtonix/sailsjs-compass-swig-quickstart.git",
+  "author": "Zenobius Jiricek",
+  "license": "MIT",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "debug": "node debug app.js"
+  },
+
+  "dependencies": {
+    "sails": "0.9.7",
+    "sails-disk": "~0.9.0",
+    "grunt": "0.4.1",
+    "swig": "~1.1.0",
+    "ejs": "0.8.4",
+    "optimist": "0.3.4",
+    "passport": "~0.1.17",
+    "passport-github": "~0.1.5",
+    "passport-persona": "~0.1.7",
+    "passport-google-plus": "~0.1.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-sass": "~0.5.0",
+    "grunt-sails-linker": "~0.9.4",
+    "grunt-contrib-compass": "~0.6.0",
+    "grunt-rev": "~0.1.0",
+    "matchdep": "~0.3.0"
+  }
+}

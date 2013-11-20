@@ -1,0 +1,8 @@
+ {
+    "name": "SailsJs Angular Starter Project",
+    "dependencies": {
+        "angular": "1.2.1",
+        "modernizr": "2.7.0",
+        "requirejs": "2.1.9"
+    }
+ }

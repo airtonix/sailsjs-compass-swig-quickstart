@@ -1,0 +1,30 @@
+=sticky-footer($height: 30em, $containerSelector: "#container", $contentSelector: "#content", $footerSelector: "#footer")
+  // <html>
+  //  <body>
+  //   <div id="site-wrapper">
+  //    <nav id="site-nav></nav>
+  //    <section id="content-wrapper"></section>
+  //    <footer id="site-footer></footer>
+  //   </div>
+  //  </body>
+  // </html>
+
+  body, html, #{$containerSelector}
+    height: 100%
+
+  body > #{$containerSelector}
+    height: auto
+    min-height: 100%
+    position: relative
+
+  #{$contentSelector}
+    padding-bottom: $height
+
+  #{$footerSelector}
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    margin-top: -$height
+    height: $height
+    clear: both
