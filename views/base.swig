@@ -17,21 +17,16 @@
     <![endif]-->
   </head>
   <body id="{{ slug || res.statusCode }}">
-    <div class="container">
-      <div class="wrapper">{% block body %}{% endblock %}</div>
+    <div id="container">
+      {% block site-nav %}<nav id="site-nav"></nav>{% endblock %}
+      <div id="content">{% block body %}{% endblock %}</div>
+      <footer id="footer">
+        <div class="row">
+        {% include 'partials/site-footer.swig' %}
+        {% block footer %}{% endblock %}
+        </div>
+      </footer>
     </div>
-    <footer id="site-footer">
-      <div class="row">
-        <ul class="button-group">
-            <li><a class="button" href="#">home</a></li>
-            <li><a class="button" href="#">home</a></li>
-            <li><a class="button" href="#">home</a></li>
-            <li><a class="button" href="#">home</a></li>
-            <li><a class="button" href="#">home</a></li>
-        </ul>
-      {% block footer %}{% endblock %}
-      </div>
-    </footer>
     <!--SCRIPTS-->
     <script src="/0.0.1/linker/js/socket.io.js"></script>
     <script src="/0.0.1/linker/js/sails.io.js"></script>

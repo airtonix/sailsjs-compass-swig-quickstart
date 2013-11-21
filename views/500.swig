@@ -10,10 +10,8 @@
      |______|______|______|
 
     //-->
-
     <h1>Internal Server Error</h1>
     <h2>Something isn't right here.</h2>
-
     {% if (typeof errors !== 'undefined') %}
     <pre class="error">
         <code>

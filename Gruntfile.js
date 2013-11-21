@@ -232,6 +232,7 @@ module.exports = function (grunt) {
         options: {
           sassDir: 'assets/linker/styles',
           cssDir: '.tmp/public/<%= pkg.version %>/linker/styles/',
+          importPath: 'bower_components/foundation/scss',
           quiet: true
         }
       }
@@ -459,6 +460,9 @@ module.exports = function (grunt) {
           'compileAssets',
           'linkAssets'
         ]
+      },
+      templates: {
+        files: ['views/**/*',],
       }
     }
   });
@@ -533,8 +537,8 @@ module.exports = function (grunt) {
     var url = baseurl + gruntSignalRoute + '?action=' + action + '&filepath=' + filepath;
 
     require('http').get(url)
-    .on('error', function(e) {
-      console.error(filepath + ' has ' + action + ', but could not signal the Sails.js server: ' + e.message);
-    });
+      .on('error', function(e) {
+        console.error(filepath + ' has ' + action + ', but could not signal the Sails.js server: ' + e.message);
+      });
   });
 };
