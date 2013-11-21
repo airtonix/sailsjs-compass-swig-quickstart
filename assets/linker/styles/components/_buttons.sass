@@ -1,77 +1,5 @@
 @import settings
-
-=separated-icon-button($color, $hover)
-    position: relative
-
-    [class^="icon-"],
-    [class*=" icon-"]
-        position: absolute
-        top: 50%
-        margin-top: -0.5em
-
-        &:after
-            content: ""
-            position: absolute
-            top: 0.4em
-            bottom: 0.4em
-
-    &.left-icon
-        padding-left: 3em
-        [class^="icon-"],
-        [class*=" icon-"]
-            left: 1em
-            margin-right: 2em
-
-            &:after
-                padding-right: 0.6em
-                box-shadow: 2px 0px 0px -1px $color
-        &:hover
-            [class^="icon-"],
-            [class*=" icon-"]
-                &:after
-                    box-shadow: 2px 0px 0px -1px $hover
-
-    &.right-icon
-        [class^="icon-"],
-        [class*=" icon-"]
-            right: 1em
-            margin-left: 2em
-
-            &:after
-                padding-left: 0.6em
-                box-shadow: -2px 0px 0px -1px $color
-
-        &:hover
-            [class^="icon-"],
-            [class*=" icon-"]
-                &:after
-                    box-shadow: -2px 0px 0px -1px $hover
-
-
-=simple-outline-button($normal, $hover)
-    +box-shadow(none)
-    text-shadow: none
-    border: 2px solid $normal
-    color: $normal
-
-    &:hover
-        border-color: $hover
-        color: $hover
-
-
-=title-button
-    text-align: left
-    font-family: $subheader-font-family
-    color: $button-font-color
-    text-shadow: 0 -1px 0 rgba(#000, 0.2)
-
-    .title
-        display: block
-        width: 100%
-        color: $button-font-color
-        font-family: $header-font-family
-        font-size: 1.2em
-
+@import mixins
 
 .button
     +box-shadow(0 -2px 0 rgba(#000, 0.2) inset)
@@ -83,13 +11,11 @@
     &:hover
         background: $button-background-hover
 
-    &.transparent,
-    &.transparent:hover
-        background: none
+    &.transparent
+        +transparent-button
 
     &.no-border
-        border: none
-        +box-shadow(none)
+        +borderless-button
 
     &.white-text
         color: white
@@ -175,85 +101,6 @@
 
 
 
-=vertical-button-group
-    line-height: 0
-    list-style: none
-
-    li
-        width: 100%
-        display: inline-block
-        float: none
-        margin: 0
-        padding: 0
-        line-height: 0
-
-        .button
-            +border-radius(0)
-            margin: 0
-            width: 100%
-            display: inline-block
-            // move buttons so edge borders overlap
-            // means we don't have to turn borders off
-            // which means we don't care what
-            // colour the border is
-            margin-top: -2px
-
-            .label
-                position: absolute
-                &.right
-                    right: 1em
-
-        &:first-child .button
-            +border-corner-radius(top, left, $global-radius)
-            +border-corner-radius(top, right, $global-radius)
-
-        &:last-child .button
-            +border-corner-radius(bottom, left, $global-radius)
-            +border-corner-radius(bottom, right, $global-radius)
-
-        &:hover .button
-            /* ensure all the border appear */
-            z-index: 10
-
-
-=horizontal-button-group
-    display: inline-block
-    list-style: none
-
-    li
-        display: inline-block
-        width: auto
-        float: left
-
-        .button
-            width: auto
-            +border-radius(0)
-            margin-left: -2px
-
-        &:first-child .button
-            +border-corner-radius(top, left, $global-radius)
-            +border-corner-radius(bottom, left, $global-radius)
-
-        &:last-child .button
-            +border-corner-radius(top, right, $global-radius)
-            +border-corner-radius(bottom, right, $global-radius)
-
-
-=icons-only-list($screen-size)
-    li a
-        *
-            display: none
-        [class^="icon-"], [class*=" icon-"]
-            display: block
-
-    @media #{$screen-size}
-        li a
-            *
-                display: block
-            [class^="icon-"], [class*=" icon-"]
-                display: none
-
-
 .button-group
     +vertical-button-group
 
@@ -264,8 +111,6 @@
             +vertical-button-group
 
 
-
-
 .button-block
     width: 100%
     display: block
@@ -274,6 +119,7 @@
         display: table
         > *
             display: table-cell
+
 
 h1,h2,h3,h4,h5,h6
     .button.transparent

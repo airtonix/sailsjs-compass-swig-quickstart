@@ -1,0 +1,4 @@
+@mixin placeholder
+    @each $prefix in "::-webkit-input", ":moz", "::-moz", ":-ms-input"
+        &#{$prefix}-placeholder
+            @content

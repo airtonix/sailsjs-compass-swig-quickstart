@@ -1,13 +1,80 @@
+@import mixins
+
 body#home
 
-    > .container
-        position: initial
+    #container
 
         #splash
-            +box-shadow(none)
-            border: none
-            position: relative
-            height: 26em
-            min-height: inherit
+            +background-image(image-url("4761691035_7e7d217daf_o_blurred.jpg"))
+            // +box-shadow(0 1px 0 rgba(#000,0.8), 0 2px 0 rgba(#fff, 0.3))
+            display: inline-block
             width: 100%
-            margin-top: -15em
+            background-position: center center
+            border-bottom: 1px solid rgba(#fff, 0.2)
+            position: relative
+            &:after
+                border-bottom: 1px solid rgba(#000, 0.7)
+                position: absolute
+                bottom: 0
+                left: 0
+                width: 100%
+                content: ""
+
+
+            #logo
+                +vertically-align($height:20em)
+                text-align: center
+                h1
+                    color: rgba(#222, 0.9)
+                    small
+                        color: rgba(#444, 0.4)
+                        display: block
+                        line-height: 1
+            form
+                input
+                    +simple-outline-button(rgba(#fff, 0.4), #fff)
+                    +transparent-button
+                    +placeholder
+                        color: #fff
+                        text-align: center
+
+                    text-align: center
+                    color: #fff
+                    padding: 0.5em
+                    height: 3em
+
+            #site-nav
+                width: 100%
+                text-align: center
+
+                > ul
+                    +horizontal-button-group
+                    display: inline-block
+                    .button
+                        +simple-outline-button(rgba(#fff, 0.4), #fff)
+                        +transparent-button
+        #below-the-fold
+
+            +headings($color: beige)
+            color: shade(beige, 10%)
+
+            .columns
+                text-align: center
+
+                ul
+                    +vertical-button-group
+                    display: inline-block
+                    li
+                        display: block
+                        .button
+                            +simple-outline-button(rgba(#fff, 0.4), #fff)
+                            +transparent-button
+    /**
+     *  And now for something completly different...
+     *  The desktop styles
+     */
+    +media(smallScreen)
+        #container
+            #splash
+                #logo
+                    height: 40em

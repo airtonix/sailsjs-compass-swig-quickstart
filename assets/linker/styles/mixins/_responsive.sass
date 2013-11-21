@@ -1,0 +1,19 @@
+@mixin media($media)
+    @if $media == smallScreen
+        @media #{$small}
+            @content
+    @else if $media == mediumScreen
+        @media #{$medium}
+            @content
+    @else if $media == largeScreen
+        @media #{$large}
+            @content
+    @else if $media == landscape
+        @media #{$landscape}
+            @content
+    @else if $media == portrait
+        @media #{$portrait}
+            @content
+    @else
+        @media #{$media}
+            @content

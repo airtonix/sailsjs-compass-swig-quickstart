@@ -1,5 +1,5 @@
 $primary-color: #00ccff
-$background-color: $primary-color
+$background-color: #333
 $success-color: pastelise(green)
 $alert-color: pastelise(red)
 $secondary-color: pastelise($primary-color)
@@ -28,7 +28,9 @@ $simple-button-outline-hover-color: $simple-button-outline-color
 
 
 
-$crumb-bg: lighten($primary-color, 5%)
-$crumb-font-color: shade($primary-color, 25%)
+$crumb-bg: tint($background-color, 5%)
+$crumb-font-color: tint($crumb-bg, 25%)
 $crumb-font-color-current: #333
 $crumb-font-color-unavailable: #999
+$crumb-border-color: none
+$crumb-border-style: none

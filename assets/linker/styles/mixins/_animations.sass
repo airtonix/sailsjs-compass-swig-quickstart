@@ -1,0 +1,17 @@
+
+@mixin keyframes ($animation_name)
+    @-webkit-keyframes #{$animation_name}
+        @content
+    @-moz-keyframes #{$animation_name}
+        @content
+    @-o-keyframes #{$animation_name}
+        @content
+    @keyframes #{$animation_name}
+        @content
+
+
+@mixin animation ($delay: 1s, $duration: 1s, $animation: fade, $mode: forwards)
+    +experimental(animation-delay, $delay)
+    +experimental(animation-duration, $duration)
+    +experimental(animation-name, $animation)
+    +experimental(animation-fill-mode, $mode)

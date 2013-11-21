@@ -1,69 +1,8 @@
-=vertically-align($inner-class: "cell", $height: 10em, $align: middle)
-	display: table
-	width: 100%
-	height: $height
-	@content
-
-	.#{$inner-class}
-		display: table-cell
-		vertical-align: $align
-
-
-@mixin font-face ( $name, $font-files, $eot: false, $weight: false, $style: false)
-	$iefont: unquote("#{$eot}?#iefix")
-	@font-face
-	font-family: quote($name)
-	@if $eot
-		src: font-url($eot)
-		$font-files: font-url($iefont) unquote("format('embedded-opentype')"), $font-files
-	src: $font-files
-	@if $weight
-		font-weight: $weight
-	@if $style
-		font-style: $style
-
-
-@mixin placeholder
-	@each $prefix in "::-webkit-input", ":moz", "::-moz", ":-ms-input"
-		&#{$prefix}-placeholder
-			@content
-
-
-@mixin keyframes ($animation_name)
-	@-webkit-keyframes #{$animation_name}
-		@content
-	@-moz-keyframes #{$animation_name}
-		@content
-	@-o-keyframes #{$animation_name}
-		@content
-	@keyframes #{$animation_name}
-		@content
-
-
-@mixin animation ($delay: 1s, $duration: 1s, $animation: fade, $mode: forwards)
-	+experimental(animation-delay, $delay)
-	+experimental(animation-duration, $duration)
-	+experimental(animation-name, $animation)
-	+experimental(animation-fill-mode, $mode)
-
-
-@mixin respondTo($media)
-	@if $media == smallScreen
-		@media #{$small}
-			@content
-	@else if $media == mediumScreen
-		@media #{$medium}
-			@content
-	@else if $media == largeScreen
-		@media #{$large}
-			@content
-	@else if $media == landscape
-		@media #{$landscape}
-			@content
-	@else if $media == portrait
-		@media #{$portrait}
-			@content
-	@else
-		@media #{$media}
-			@content
-
+@import mixins/alignment
+@import mixins/animations
+@import mixins/fonts
+@import mixins/html5
+@import mixins/responsive
+@import mixins/sticky-footer
+@import mixins/buttons
+@import mixins/elements
