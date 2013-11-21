@@ -151,10 +151,15 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    logLevel: 0,
     rev: {
       files: {
-        src: [screenCssToInject, printCssToInject, ieCssToInject, jsFilesToInject]
+        src: [
+          screenCssToInject,
+          printCssToInject,
+          ieCssToInject,
+          jsFilesToInject
+        ]
       }
     },
 
@@ -223,20 +228,9 @@ module.exports = function (grunt) {
     compass: {
       dev: {
         options: {
-          sassDir: 'assets/linker/styles/',
-          fontDir: 'assets/fonts/',
+          sassDir: 'assets/linker/styles',
           cssDir: '.tmp/public/<%= pkg.version %>/linker/styles/',
-          cssPath: '.tmp/public/<%= pkg.version %>/linker/styles/',
-          outputStyle: 'nested',
-          relativeAssets: true
-        }
-      },
-      prod: {
-        options: {
-          sassDir: 'assets/styles/',
-          fontDir: 'assets/fonts/',
-          cssPath: '.tmp/public/<%= pkg.version %>/linker/styles/',
-          outputStyle: 'compressed'
+          quiet: true
         }
       }
     },
@@ -308,6 +302,9 @@ module.exports = function (grunt) {
 
 
     'sails-linker': {
+      /*
+        Development Linkers
+       */
       devJs: {
         options: {
           startTag: '<!--SCRIPTS-->',
@@ -322,22 +319,6 @@ module.exports = function (grunt) {
           'views/**/*.swig': jsFilesToInject
         }
       },
-
-      prodJs: {
-        options: {
-          startTag: '<!--SCRIPTS-->',
-          endTag: '<!--SCRIPTS END-->',
-          fileTmpl: '<script src="%s"></script>',
-          appRoot: '.tmp/public'
-        },
-        files: {
-          '.tmp/public/**/*.html': ['.tmp/public/<%= pkg.version %>/min/production.js'],
-          'views/**/*.html': ['.tmp/public/<%= pkg.version %>/min/production.js'],
-          'views/**/*.ejs': ['.tmp/public/<%= pkg.version %>/min/production.js'],
-          'views/**/*.swig': ['.tmp/public/<%= pkg.version %>/min/production.js']
-        }
-      },
-
       devScreenStyles: {
         options: {
           startTag: '<!--SCREEN STYLES-->',
@@ -377,7 +358,6 @@ module.exports = function (grunt) {
           fileTmpl: '<link rel="stylesheet" media="screen, projector" href="%s">',
           appRoot: '.tmp/public'
         },
-
         // cssFilesToInject defined up top
         files: {
           '.tmp/public/**/*.html': ieCssToInject,
@@ -386,7 +366,39 @@ module.exports = function (grunt) {
           'views/**/*.swig': ieCssToInject
         }
       },
+      // Bring in JST template object
+      devTpl: {
+        options: {
+          startTag: '<!--TEMPLATES-->',
+          endTag: '<!--TEMPLATES END-->',
+          fileTmpl: '<script type="text/javascript" src="%s"></script>',
+          appRoot: '.tmp/public'
+        },
+        files: {
+          '.tmp/public/index.html': ['.tmp/public/<%= pkg.version %>/jst.js'],
+          'views/**/*.html': ['.tmp/public/<%= pkg.version %>/jst.js'],
+          'views/**/*.ejs': ['.tmp/public/<%= pkg.version %>/jst.js'],
+          'views/**/*.swig': ['.tmp/public/<%= pkg.version %>/jst.js']
+        }
+      },
 
+      /*
+        Production Linkers
+       */
+      prodJs: {
+        options: {
+          startTag: '<!--SCRIPTS-->',
+          endTag: '<!--SCRIPTS END-->',
+          fileTmpl: '<script src="%s"></script>',
+          appRoot: '.tmp/public'
+        },
+        files: {
+          '.tmp/public/**/*.html': ['.tmp/public/<%= pkg.version %>/min/production.js'],
+          'views/**/*.html': ['.tmp/public/<%= pkg.version %>/min/production.js'],
+          'views/**/*.ejs': ['.tmp/public/<%= pkg.version %>/min/production.js'],
+          'views/**/*.swig': ['.tmp/public/<%= pkg.version %>/min/production.js']
+        }
+      },
       prodScreenStyles: {
         options: {
           startTag: '<!--SCREEN STYLES-->',
@@ -430,22 +442,6 @@ module.exports = function (grunt) {
         }
       },
 
-      // Bring in JST template object
-      devTpl: {
-        options: {
-          startTag: '<!--TEMPLATES-->',
-          endTag: '<!--TEMPLATES END-->',
-          fileTmpl: '<script type="text/javascript" src="%s"></script>',
-          appRoot: '.tmp/public'
-        },
-        files: {
-          '.tmp/public/index.html': ['.tmp/public/<%= pkg.version %>/jst.js'],
-          'views/**/*.html': ['.tmp/public/<%= pkg.version %>/jst.js'],
-          'views/**/*.ejs': ['.tmp/public/<%= pkg.version %>/jst.js'],
-          'views/**/*.swig': ['.tmp/public/<%= pkg.version %>/jst.js']
-        }
-      },
-
     },
 
     watch: {
@@ -455,9 +451,7 @@ module.exports = function (grunt) {
       },
       assets: {
         // Assets to watch:
-        files: [
-          'assets/**/*',
-          ],
+        files: ['assets/**/*'],
         // When assets are changed:
         tasks: [
           'compileAssets',

@@ -17,7 +17,7 @@ module.exports.session = {
   // forcing them to log in again.
 
   // todo: autogenerate this
-  secret: 'random-string-of-letters'
+  secret: 'lj3loij23l4j2l3k4j2l3kj42jkhsldi87'
 
 
   // In production, uncomment the following lines to set up a shared redis session store
