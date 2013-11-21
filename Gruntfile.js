@@ -153,13 +153,15 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     logLevel: 0,
     rev: {
-      files: {
-        src: [
-          screenCssToInject,
-          printCssToInject,
-          ieCssToInject,
-          jsFilesToInject
-        ]
+      prod:{
+        files: {
+          src: [
+            screenCssToInject,
+            printCssToInject,
+            ieCssToInject,
+            jsFilesToInject
+          ]
+        }
       }
     },
 
@@ -475,7 +477,6 @@ module.exports = function (grunt) {
     'coffee:dev',
     'copy:dev',
     'copy:bower',
-    'rev'
   ]);
 
   grunt.registerTask('linkAssets', [
@@ -511,6 +512,8 @@ module.exports = function (grunt) {
     'uglify',
     'cssmin',
 
+    'rev:prod',
+
     'sails-linker:prodJs',
     'sails-linker:prodScreenStyles',
     'sails-linker:prodPrintStyles',
@@ -520,18 +523,18 @@ module.exports = function (grunt) {
   ]);
 
   // When API files are changed:
-  // grunt.event.on('watch', function(action, filepath) {
-  //   grunt.log.writeln(filepath + ' has ' + action);
+  grunt.event.on('watch', function(action, filepath) {
+    grunt.log.writeln(filepath + ' has ' + action);
 
-  //   // Send a request to a development-only endpoint on the server
-  //   // which will reuptake the file that was changed.
-  //   var baseurl = grunt.option('baseurl');
-  //   var gruntSignalRoute = grunt.option('signalpath');
-  //   var url = baseurl + gruntSignalRoute + '?action=' + action + '&filepath=' + filepath;
+    // Send a request to a development-only endpoint on the server
+    // which will reuptake the file that was changed.
+    var baseurl = grunt.option('baseurl');
+    var gruntSignalRoute = grunt.option('signalpath');
+    var url = baseurl + gruntSignalRoute + '?action=' + action + '&filepath=' + filepath;
 
-  //   require('http').get(url)
-  //   .on('error', function(e) {
-  //     console.error(filepath + ' has ' + action + ', but could not signal the Sails.js server: ' + e.message);
-  //   });
-  // });
+    require('http').get(url)
+    .on('error', function(e) {
+      console.error(filepath + ' has ' + action + ', but could not signal the Sails.js server: ' + e.message);
+    });
+  });
 };
