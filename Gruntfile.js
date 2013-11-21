@@ -172,10 +172,10 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './assets',
           src: [
-            'styles/*.css',
+            '**/*.css',
             '**/*.js',
-            '**/*.(png,gif,bmp,jpg,jpeg)',
-            '**/*.(ttf,otf,woff,eof)',
+            '**/*.{png,gif,bmp,jpg,jpeg}',
+            '**/*.{ttf,otf,woff,eof}',
           ],
           dest: '.tmp/public/<%= pkg.version %>'
         }
@@ -230,7 +230,10 @@ module.exports = function (grunt) {
     compass: {
       dev: {
         options: {
+          httpPath: '/<%= pkg.version %>/',
           sassDir: 'assets/linker/styles',
+          // imagesDir: 'assets/images',
+          // imagesPath: '<%= pkg.version %>/images',
           cssDir: '.tmp/public/<%= pkg.version %>/linker/styles/',
           importPath: 'bower_components/foundation/scss',
           quiet: true
