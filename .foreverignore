@@ -1,0 +1,5 @@
+# .foreverignore
+
+**/.tmp/**
+**/views/base.swig
+**/.git/**
